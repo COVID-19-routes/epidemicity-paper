@@ -1,4 +1,4 @@
-function [Rt,et]=SEPIAR_eigen_t(...
+function [R_t,e_t]=SEPIAR_eigen_t(...
             betaP,betaI,betaA,epsilon,chiE,chiP,chiI,chiA,...
             mu,deltaE,deltaP,sigma,gammaI,eta,alpha,gammaA,...
             St,Et,Pt,It,At,Rt,MS,ME,MP,MI,MA,MR,n,W,Wpi)
@@ -41,7 +41,7 @@ function [Rt,et]=SEPIAR_eigen_t(...
     K=deltaE*(ThetaP+sigma*deltaP*ThetaI*phiI_inv+(1-sigma)*deltaP*ThetaA*phiA_inv)*phiE_inv*phiP_inv;
     
     % effective reproduction number
-    Rt=eigs(K,1,'largestabs');
+    R_t=eigs(K,1,'largestabs');
     
     %  Jacobian matrix
     J0=[-mu*U Z -ThetaP -ThetaI -ThetaA Z Z Z Z Z;
@@ -60,5 +60,5 @@ function [Rt,et]=SEPIAR_eigen_t(...
     H0=(H0_temp+H0_temp')/2;
     
     % effective epidemicity index
-    et=eigs(H0,1,'largestreal');
+    e_t=eigs(H0,1,'largestreal');
 end
